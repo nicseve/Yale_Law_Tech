@@ -44,9 +44,12 @@
         mapTypeId: 'roadmap'
       });
 
+      var image = 'https://students.yale.edu/facebook/Photo?id=' + '398899';
+
       var marker = new google.maps.Marker({
         position: latlong,
-        map: map
+        map: map,
+        icon: image
       })
     }
 
