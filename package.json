@@ -1,0 +1,25 @@
+{
+  "name": "yalelawtech",
+  "version": "1.0.0",
+  "description": "Yale Law, Tech, and Culture project inspired by Feist v. Rural case law.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicseve/Yale_Law_Tech.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicseve/Yale_Law_Tech/issues"
+  },
+  "homepage": "https://github.com/nicseve/Yale_Law_Tech#readme",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "path": "^0.12.7"
+  }
+}
