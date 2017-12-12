@@ -4,7 +4,8 @@
   "description": "Yale Law, Tech, and Culture project inspired by Feist v. Rural case law.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "here": "nodemon start"
   },
   "repository": {
     "type": "git",
