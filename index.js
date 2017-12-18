@@ -4,14 +4,34 @@ const axios = require('axios');
 const router = require('./routes');
 const path = require('path');
 
+// configure passport
+const passport = require('passport');
+const session = require('express-session');
+const configPassport = require('./passport');
+const auth = require('./auth');
+configPassport(passport);
+
 const port = process.env.PORT || 3000;
 const app = express();
 
-// app.use(logger('dev'));
-
+// middleware
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
+// required for passport
+app.use(session({ secret: 'ilovehorizonshackathon' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
+//Login Route
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/public/login.html');
+});
+
+//Authentication Routes
+auth(app, passport);
+
+// routes
 app.use('/', router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -24,7 +44,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 // production error handler
 // no stacktraces leaked to user
@@ -40,24 +59,3 @@ app.use(function(err, req, res, next) {
 app.listen(port, function() {
   console.log('Server started! Listening on port %s', port);
 });
-
-
-// var stud_info = new Student({
-//   name: studentdata[0]['Name'],
-//   url: studentdata[0]['URL'],
-//   lat: studentdata[0]['Latitude'],
-//   long: studentdata[0]['Longitude']
-// });
-//
-// stud_info.save(function(err) {
-//   console.log("results of save:", err);
-// })
-
-// studentdata.forEach(function(stud, i) {
-//   var stud_info = new Student({
-//     name: stud['Name'],
-//     url: stud['URL'],
-//     lat: stud['Latitude'],
-//     long: stud['Longitude']
-//   })
-// })
