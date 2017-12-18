@@ -50,7 +50,6 @@
 
           // CREATE MARKERS
           students.forEach(function(stud, i) {
-            console.log('s['+i+']=', stud);
             var marker = new google.maps.Marker({
               position: {lat: stud.lat, lng: stud.long},
               map: map,
