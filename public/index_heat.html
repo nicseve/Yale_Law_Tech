@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -64,6 +65,7 @@
   <script async defer>
     var students;
     var initMap;
+    var eqfeed_callback;
 
     $('#warning').hide();
 
@@ -72,7 +74,7 @@
       url: '/Kpcr1ukvkd9toBN3dAWE',
       method: 'get',
       success: function(result, error) {
-        console.log('SUCCESS ? ', result, error);
+        // console.log('SUCCESS ? ', result, error);
         students = result;
 
         console.log("reaches map", students[0]);
@@ -81,54 +83,56 @@
         initMap = function () {
           const latlong = {lat: 41.313616, lng: -72.920970};
 
+          // CODE FOR HEAT MAP:
+          console.log('in eq callbac');
+          var heatmapData = [];
+          for (var i = 0; i < students.length; i++) {
+            console.log('s['+i+']=', students[i]);
+
+            var latLng = new google.maps.LatLng(students[i].lat, students[i].long);
+            heatmapData.push(latLng);
+          }
+
+          heatmap = new google.maps.visualization.HeatmapLayer({
+            data: heatmapData,
+            map: map
+          });
+
           map = new google.maps.Map(document.getElementById('map'), {
             zoom: 7,
             center: latlong,
             mapTypeId: 'satellite',
           });
 
-          var image = 'https://students.yale.edu/facebook/Photo?id=' + '398899';
 
-          // var marker = new google.maps.Marker({
-          //   position: latlong,
-          //   map: map,
-          //   icon: image
-          // })
-          var locations = [];
-
-          students.forEach(function(stud, i) {
-            console.log('s['+i+']=', stud);
-            var marker = new google.maps.Marker({
-              position: {lat: stud.lat, lng: stud.long},
-              map: map,
-              icon: {
-                url: stud.icon,
-              }
-            });
-            locations[i] = marker;
-          });
-
-          google.maps.event.addListener(map, 'tilesloaded', function() {
-            unlock = true;
-          });
-
+          // // MARKER CLUSTER CODE
+          // var locations = [];
+          // students.forEach(function(stud, i) {
+          //   console.log('s['+i+']=', stud);
+          //   var marker = new google.maps.Marker({
+          //     position: {lat: stud.lat, lng: stud.long},
+          //     map: map,
+          //     icon: './pixel_dot.png'
+          //   });
+          //   locations[i] = marker;
+          // });
+          //
+          // var options = {
+          //   imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+          // };
+          //
+          // var markerCluster = new MarkerClusterer(map, locations, options);
         }
 
         console.log('SHOULD FINISH LOOP');
-
-        // ADD Marker Clusters
-        // var markerCluster = new MarkerClusterer(map1, locations,
-        //  {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
         showMap();
       }
     });
 
     var showMap = (function () {
       console.log('in show map');
-      document.getElementById("map_src").setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAD4XfinLq0CaUSr_D_OUxUrHbZDlnSjYY&callback=initMap');
+      document.getElementById("map_src").setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAD4XfinLq0CaUSr_D_OUxUrHbZDlnSjYY&libraries=visualization&callback=initMap');
       document.getElementById("map").append("please wait while data loads!"); // this is so that the page reloads when it reaches this method
-      // var newEl = document.createElement("<div>");
       $("#warning").show();
     }).bind(this);
 
@@ -141,9 +145,8 @@
         <div id="subtext">(you must be logged into your yale account to view)</div>
       </div>
       <div id='buttons'>
+        <button href='/'>image markers</button>
         <button href='/markers'>plain markers</button>
-        <button href='/heatmap'>heat map</button>
-
       </div>
     </div>
     <div id='map'> </div>

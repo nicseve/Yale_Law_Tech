@@ -8,10 +8,18 @@ console.log("at 0:", studentdata[0]);
 router.get('/', (req, res) => {
   console.log('in / route!');
   res.sendFile(path.join(__dirname + '/public/index.html'));
-
-
-  // res.redirect('/map');
 });
+
+router.get('/markers', (req, res) => {
+  console.log('in /markers route!');
+  res.sendFile(path.join(__dirname + '/public/index_markers.html'));
+});
+
+// router.get('/heatmap', (req, res) => {
+//   console.log('in /heatmap route!');
+//   res.sendFile(path.join(__dirname + '/public/index_heat.html'));
+// });
+
 
 
 var markers = ["amanda"];

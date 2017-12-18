@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -65,8 +66,6 @@
     var students;
     var initMap;
 
-    $('#warning').hide();
-
     $.ajax({
       dataType: "json",
       url: '/Kpcr1ukvkd9toBN3dAWE',
@@ -87,23 +86,13 @@
             mapTypeId: 'satellite',
           });
 
-          var image = 'https://students.yale.edu/facebook/Photo?id=' + '398899';
-
-          // var marker = new google.maps.Marker({
-          //   position: latlong,
-          //   map: map,
-          //   icon: image
-          // })
           var locations = [];
 
           students.forEach(function(stud, i) {
             console.log('s['+i+']=', stud);
             var marker = new google.maps.Marker({
               position: {lat: stud.lat, lng: stud.long},
-              map: map,
-              icon: {
-                url: stud.icon,
-              }
+              map: map
             });
             locations[i] = marker;
           });
@@ -111,25 +100,17 @@
           google.maps.event.addListener(map, 'tilesloaded', function() {
             unlock = true;
           });
-
         }
 
         console.log('SHOULD FINISH LOOP');
-
-        // ADD Marker Clusters
-        // var markerCluster = new MarkerClusterer(map1, locations,
-        //  {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
         showMap();
       }
     });
 
     var showMap = (function () {
       console.log('in show map');
-      document.getElementById("map_src").setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAD4XfinLq0CaUSr_D_OUxUrHbZDlnSjYY&callback=initMap');
+      document.getElementById("map_src").setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAD4XfinLq0CaUSr_D_OUxUrHbZDlnSjYY&libraries=visualization&callback=initMap');
       document.getElementById("map").append("please wait while data loads!"); // this is so that the page reloads when it reaches this method
-      // var newEl = document.createElement("<div>");
-      $("#warning").show();
     }).bind(this);
 
   </script>
@@ -141,7 +122,7 @@
         <div id="subtext">(you must be logged into your yale account to view)</div>
       </div>
       <div id='buttons'>
-        <button href='/markers'>plain markers</button>
+        <button href='/'>image markers</button>
         <button href='/heatmap'>heat map</button>
 
       </div>
