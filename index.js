@@ -40,3 +40,24 @@ app.use(function(err, req, res, next) {
 app.listen(port, function() {
   console.log('Server started! Listening on port %s', port);
 });
+
+
+// var stud_info = new Student({
+//   name: studentdata[0]['Name'],
+//   url: studentdata[0]['URL'],
+//   lat: studentdata[0]['Latitude'],
+//   long: studentdata[0]['Longitude']
+// });
+//
+// stud_info.save(function(err) {
+//   console.log("results of save:", err);
+// })
+
+// studentdata.forEach(function(stud, i) {
+//   var stud_info = new Student({
+//     name: stud['Name'],
+//     url: stud['URL'],
+//     lat: stud['Latitude'],
+//     long: stud['Longitude']
+//   })
+// })

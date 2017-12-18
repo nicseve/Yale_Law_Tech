@@ -56,3 +56,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+#stud info
+/public/students.json

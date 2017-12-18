@@ -13,49 +13,142 @@
         height: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
-      html, body {
+     body {
         height: 80vh;
-        width: 80vw;
+        width: 90vw;
         margin: 5vh 5vw;
         padding: 0;
+        background-color: black;
+        color: white;
       }
       h1 {
         margin: 0;
       }
+      #subtext {
+        color: lightgrey;
+        font-weight: normal;
+        font-size: 13px;
+      }
+      #title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Bungee';
+        background-color: #045372;
+        padding: 1vh 1vw;
+        margin: 1vh 5vw;
+      }
+      #map {
+        margin: 1vh 5vw 3vh 5vw;
+      }
+      #warning {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        color: rgb(9, 98, 135);
+        font-family: 'Bungee';
+        font-size: 11px;
+        padding: 0 0 1% 0;
+      }
     </style>
+    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
   </head>
+  <script type="text/javascript" src="students.json"></script>
+  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+
+  <script async defer>
+    var students;
+    var initMap;
+
+    $('#warning').hide();
+
+    $.ajax({
+      dataType: "json",
+      url: '/map',
+      method: 'get',
+      success: function(result, error) {
+        console.log('SUCCESS ? ', result, error);
+        students = result;
+
+        console.log("reaches map", students[0]);
+        var map;
+
+        initMap = function () {
+          const latlong = {lat: 41.313616, lng: -72.920970};
+
+          map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 7,
+            center: latlong,
+            mapTypeId: 'satellite',
+          });
+
+          var image = 'https://students.yale.edu/facebook/Photo?id=' + '398899';
+
+          // var marker = new google.maps.Marker({
+          //   position: latlong,
+          //   map: map,
+          //   icon: image
+          // })
+          var locations = [];
+
+          students.forEach(function(stud, i) {
+            console.log('s['+i+']=', stud);
+            var marker = new google.maps.Marker({
+              position: {lat: stud.lat, lng: stud.long},
+              map: map,
+              icon: {
+                url: stud.icon,
+                // size: new google.maps.Size(20, 20)
+              }
+            });
+            locations[i] = marker;
+          });
+
+
+          // var markerCluster = new MarkerClusterer(map, locations,
+          //  {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+        }
+
+        console.log('SHOULD FINISH LOOP');
+
+        // ADD Marker Clusters
+        // var markerCluster = new MarkerClusterer(map1, locations,
+        //  {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+        showMap();
+      }
+    });
+
+    var showMap = (function () {
+      console.log('in show map');
+      document.getElementById("map_src").setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAD4XfinLq0CaUSr_D_OUxUrHbZDlnSjYY&callback=initMap');
+      document.getElementById("map").append("please wait while data loads!"); // this is so that the page reloads when it reaches this method
+      // var newEl = document.createElement("<div>");
+      $("#warning").show();
+    }).bind(this);
+
+  </script>
 
   <body>
     <div id='root'>
-      <h1>yale law tech project</h1>
+      <div id='title'>
+        <h1>yale law tech project</h1>
+        <div id="subtext">(you must be logged into your yale account to view)</div>
+      </div>
     </div>
     <div id='map'> </div>
+    <script id='map_src'></script>
 
-    <script>
-    console.log("reaches map");
+    <div id='warning'>
+      (map will load slowly because of all the images)
+    </div>
 
-    var map;
-    function initMap() {
-      const latlong = {lat: 41.313616, lng: -72.920970};
-
-      map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 16,
-        center: latlong,
-        mapTypeId: 'roadmap'
-      });
-
-      var image = 'https://students.yale.edu/facebook/Photo?id=' + '398899';
-
-      var marker = new google.maps.Marker({
-        position: latlong,
-        map: map,
-        icon: image
-      })
-    }
-
-    </script>
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD4XfinLq0CaUSr_D_OUxUrHbZDlnSjYY&callback=initMap">
-    </script>
   </body>
+
 </html>
