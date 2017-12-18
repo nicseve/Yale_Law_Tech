@@ -3,59 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>yale law tech project</title>
-
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-     body {
-        height: 80vh;
-        width: 90vw;
-        margin: 5vh 5vw;
-        padding: 0;
-        background-color: black;
-        color: white;
-      }
-      h1 {
-        margin: 0;
-      }
-      #subtext {
-        color: lightgrey;
-        font-weight: normal;
-        font-size: 13px;
-      }
-      #title {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-family: 'Bungee';
-        background-color: #045372;
-        padding: 1vh 1vw;
-        margin: 1vh 5vw;
-      }
-      #map {
-        margin: 1vh 5vw 3vh 5vw;
-      }
-      #warning {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        color: rgb(9, 98, 135);
-        font-family: 'Bungee';
-        font-size: 11px;
-        padding: 0 0 1% 0;
-      }
-    </style>
+    <link rel="icon" href="./yale_icon1.png">
     <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+    <link href="./main.css" rel="stylesheet">
   </head>
-  <script type="text/javascript" src="students.json"></script>
-  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 
+  <!-- STYLESHEET & JQuery -->
+  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
   <script
     src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -65,8 +21,7 @@
     var students;
     var initMap;
 
-    $('#warning').hide();
-
+    // GET JSON FILE
     $.ajax({
       dataType: "json",
       url: '/Kpcr1ukvkd9toBN3dAWE',
@@ -78,6 +33,7 @@
         console.log("reaches map", students[0]);
         var map;
 
+        // FUNCTION TO INITIALIZE MAP
         initMap = function () {
           const latlong = {lat: 41.313616, lng: -72.920970};
 
@@ -85,17 +41,14 @@
             zoom: 7,
             center: latlong,
             mapTypeId: 'satellite',
+            mapTypeControlOptions: {
+              mapTypeIds: ['roadmap', 'terrain', 'satellite']
+            }
           });
 
-          var image = 'https://students.yale.edu/facebook/Photo?id=' + '398899';
-
-          // var marker = new google.maps.Marker({
-          //   position: latlong,
-          //   map: map,
-          //   icon: image
-          // })
           var locations = [];
 
+          // CREATE MARKERS
           students.forEach(function(stud, i) {
             console.log('s['+i+']=', stud);
             var marker = new google.maps.Marker({
@@ -103,6 +56,7 @@
               map: map,
               icon: {
                 url: stud.icon,
+                scaledSize: new google.maps.Size(45, 45)
               }
             });
             locations[i] = marker;
@@ -124,6 +78,7 @@
       }
     });
 
+    // FUNCTION TO SHOW MAP AFTER JSON LOADED
     var showMap = (function () {
       console.log('in show map');
       document.getElementById("map_src").setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAD4XfinLq0CaUSr_D_OUxUrHbZDlnSjYY&callback=initMap');
@@ -131,9 +86,9 @@
       // var newEl = document.createElement("<div>");
       $("#warning").show();
     }).bind(this);
-
   </script>
 
+  <!-- HTML STRUCTURE -->
   <body>
     <div id='root'>
       <div id='title'>
@@ -141,8 +96,9 @@
         <div id="subtext">(you must be logged into your yale account to view)</div>
       </div>
       <div id='buttons'>
-        <button href='/markers'>plain markers</button>
-        <button href='/heatmap'>heat map</button>
+        <div class='btn'>switch to:</div>
+        <a class='btn' href='/'>plain markers</a>
+        <a class='btn' href='/heatmap'>heat map</a>
 
       </div>
     </div>

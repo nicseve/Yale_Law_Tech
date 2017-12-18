@@ -7,20 +7,18 @@ console.log("at 0:", studentdata[0]);
 
 router.get('/', (req, res) => {
   console.log('in / route!');
-  res.sendFile(path.join(__dirname + '/public/index.html'));
+  res.sendFile(path.join(__dirname + '/public/index_markers.html'));
 });
 
 router.get('/markers', (req, res) => {
   console.log('in /markers route!');
-  res.sendFile(path.join(__dirname + '/public/index_markers.html'));
+  res.sendFile(path.join(__dirname + '/public/index_images.html'));
 });
 
-// router.get('/heatmap', (req, res) => {
-//   console.log('in /heatmap route!');
-//   res.sendFile(path.join(__dirname + '/public/index_heat.html'));
-// });
-
-
+router.get('/heatmap', (req, res) => {
+  console.log('in /heatmap route!');
+  res.sendFile(path.join(__dirname + '/public/index_heat.html'));
+});
 
 var markers = ["amanda"];
 

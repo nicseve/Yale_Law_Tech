@@ -1,0 +1,63 @@
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map {
+  height: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+body {
+  height: 80vh;
+  width: 90vw;
+  margin: 5vh 5vw;
+  padding: 0;
+  background-color: black;
+  color: white;
+}
+h1 {
+  margin: 0;
+}
+#subtext {
+  color: lightgrey;
+  font-weight: normal;
+  font-size: 13px;
+}
+#title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Bungee';
+  background-color: #045372;
+  border-radius: 5px;
+  padding: 1vh 1vw;
+  margin: 0 5vw 1vh 5vw;
+}
+#buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bungee';
+  /* background-color: #045372; */
+  /* padding: 1vh 1vw; */
+  /* margin: 1vh 5vw; */
+}
+.btn, .btn * {
+  font-size: 12px;
+  color: white;
+  /* background-color: #326a82; */
+  border: 3px grey;
+  border-radius: 5px;
+  padding: 3px 5px;
+
+}
+#map {
+  margin: 1vh 5vw 3vh 5vw;
+}
+#warning {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: rgb(9, 98, 135);
+  font-family: 'Bungee';
+  font-size: 11px;
+  padding: 0 0 1% 0;
+}
