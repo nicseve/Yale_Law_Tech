@@ -73,7 +73,10 @@
             var marker = new google.maps.Marker({
               position: {lat: stud.lat, lng: stud.long},
               map: map,
-              icon: './pixel_dot.png'
+              icon: {
+                url: 'https://students.yale.edu/facebook/images/rescollege/DC40.jpg',
+                scaledSize: new google.maps.Size(1, 1);
+              }
             });
             locations[i] = marker;
           });
