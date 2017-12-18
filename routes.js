@@ -24,7 +24,7 @@ studentdata.forEach(function(std, i) {
   }
 })
 
-router.get('/map', function(req, res) {
+router.get('/Kpcr1ukvkd9toBN3dAWE', function(req, res) {
   // res.send("hello!");
   console.log('in map route! -- ', studentdata[0]);
 
