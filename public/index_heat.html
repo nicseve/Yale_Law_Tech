@@ -69,7 +69,6 @@
           // MARKER CLUSTER CODE
           var locations = [];
           students.forEach(function(stud, i) {
-            console.log('s['+i+']=', stud);
             var marker = new google.maps.Marker({
               position: {lat: stud.lat, lng: stud.long},
               map: map,
@@ -111,7 +110,7 @@
       <div id='buttons'>
         <div class='btn'>switch to:</div>
         <a class='btn' href='/markers'>image markers</a>
-        <a class='btn' href='/'>plain markers</a>
+        <a class='btn' href='/'>college markers</a>
       </div>
     </div>
     <div id='map'> </div>
