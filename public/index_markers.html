@@ -53,12 +53,13 @@
           // CREATE MARKERS
           var locations = [];
           students.forEach(function(stud, i) {
+            // console.log('stud col: ',stud.col);
             var marker = new google.maps.Marker({
               position: {lat: stud.lat, lng: stud.long},
               map: map,
               icon: {
-                url: 'https://students.yale.edu/facebook/Photo?id=0',
-                scaledSize: new google.maps.Size(5, 5)
+                url: picUrl(stud.col),
+                scaledSize: new google.maps.Size(22, 22)
               }
             });
             locations[i] = marker;
@@ -73,6 +74,44 @@
         showMap();
       }
     });
+
+    // FUNCTION TO MATCH COLLEGE TO IMAGE
+    var picUrl = (function (college) {
+      // console.log('matching image to student...');
+      if (college.toLowerCase().indexOf('benjamin') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/BF40.jpg';
+      } else if (college.toLowerCase().indexOf('berkeley') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/BK40.jpg';
+      } else if (college.toLowerCase().indexOf('branford') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/BR40.jpg';
+      } else if (college.toLowerCase().indexOf('davenport') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/DC40.jpg';
+      } else if (college.toLowerCase().indexOf('ezra') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/ES40.jpg';
+      } else if (college.toLowerCase().indexOf('grace') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/GH40.jpg';
+      } else if (college.toLowerCase().indexOf('jonathan') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/JE40.jpg';
+      } else if (college.toLowerCase().indexOf('morse') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/MC40.jpg';
+      } else if (college.toLowerCase().indexOf('murray') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/PM40.jpg';
+      } else if (college.toLowerCase().indexOf('pierson') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/PC40.jpg';
+      } else if (college.toLowerCase().indexOf('saybrook') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/SY40.jpg';
+      } else if (college.toLowerCase().indexOf('silliman') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/SM40.jpg';
+      } else if (college.toLowerCase().indexOf('dwight') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/TD40.jpg';
+      } else if (college.toLowerCase().indexOf('trumbull') >= 0) {
+        return 'https://students.yale.edu/facebook/images/rescollege/TC40.jpg';
+      } else {
+        console.log("couldn't map college");
+        return 'https://students.yale.edu/facebook/Photo?id=0';
+      }
+
+    }).bind(this);
 
     // FUNCTION TO SHOW MAP AFTER JSON LOADED
     var showMap = (function () {

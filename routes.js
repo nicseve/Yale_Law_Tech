@@ -24,6 +24,7 @@ var markers = ["amanda"];
 
 studentdata.forEach(function(std, i) {
   markers[i] = {
+    col: std.College,
     lat: std.Latitude,
     long: std.Longitude,
     icon: std.URL
