@@ -24,9 +24,30 @@ module.exports = function(passport) {
           displayName: profile.name,
           email: profile.emails[0]
       };
+
       console.log('USER:', user, 'PROFILE INFO',profile);
 
-      return cb(null, user);
+
+      if (user.email.value.indexOf("@yale.edu") >= 0) {
+        console.log('USER IS FROM YALE ACCOUNT');
+        console.log('USER IS FROM YALE ACCOUNT');
+        console.log('USER IS FROM YALE ACCOUNT');
+        console.log('USER IS FROM YALE ACCOUNT');
+        console.log('USER IS FROM YALE ACCOUNT');
+        return cb(null, user);
+
+
+      } else {
+        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
+        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
+        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
+        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
+        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
+
+        return cb(new Error('user not from yale acct'), null);
+      }
+
+
     }
   ));
 }
