@@ -9,15 +9,15 @@ module.exports = function(passport) {
       callbackURL: "http://yalelawtech.herokuapp.com/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
-      // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        console.log('in passport google strategy', accessToken);
-        const user = {
-            googleId: profile.id,
-            accessToken: accessToken,
-            displayName: profile.name
-        };
-        return cb(null, user);
-      // });
+      console.log('in passport google strategy!', accessToken);
+      const user = {
+          googleId: profile.id,
+          accessToken: accessToken,
+          displayName: profile.name
+      };
+      console.log('USER:', user);
+
+      return cb(null, user);
     }
   ));
 }
