@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const router = require('./routes');
+const router = require('./backend/routes');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 // configure passport
 const passport = require('passport');
 const session = require('express-session');
-const configPassport = require('./passport');
+const configPassport = require('./backend/passport');
 configPassport(passport);
 
 const port = process.env.PORT || 3000;
@@ -27,11 +27,11 @@ app.use(passport.session()); // persistent login sessions
 
 //Login Route
 app.get('/login', (req, res) => {
-  res.sendFile(__dirname + '/public/login.html');
+  res.sendFile(__dirname + '/public/layouts/login.html');
 });
 
 //Authentication Routes
-const auth = require('./auth');
+const auth = require('./backend/auth');
 auth(app, passport);
 
 // routes

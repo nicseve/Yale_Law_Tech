@@ -1,6 +1,7 @@
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 module.exports = function(passport) {
+  // passport functions
   passport.serializeUser(function(user, callback){
     console.log('serializing user.');
     callback(null, user);
@@ -10,6 +11,8 @@ module.exports = function(passport) {
     console.log('deserialize user.');
     callback(null, user);
   });
+
+  // create strategy -- call callback when done
   passport.use(new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
@@ -25,29 +28,7 @@ module.exports = function(passport) {
           email: profile.emails[0]
       };
 
-      console.log('USER:', user, 'PROFILE INFO',profile);
-
-
-      if (user.email.value.indexOf("@yale.edu") >= 0) {
-        console.log('USER IS FROM YALE ACCOUNT');
-        console.log('USER IS FROM YALE ACCOUNT');
-        console.log('USER IS FROM YALE ACCOUNT');
-        console.log('USER IS FROM YALE ACCOUNT');
-        console.log('USER IS FROM YALE ACCOUNT');
-        return cb(null, user);
-
-
-      } else {
-        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
-        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
-        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
-        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
-        console.log('USER IS NOT NOT NOT FROM YALE ACCOUNT');
-
-        return cb(new Error('user not from yale acct'), null);
-      }
-
-
+      return cb(null, user);
     }
   ));
 }

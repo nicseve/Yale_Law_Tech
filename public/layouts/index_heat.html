@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,13 +11,15 @@
     <link href="./main.css" rel="stylesheet">
   </head>
 
-  <!-- STYLESHEET & JQuery -->
+  <!-- MARKER CLUSTERS & JQuery IMPORTS -->
+  <script type="text/javascript" src="students.json"></script>
   <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
   <script
     src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
 
+  <!-- CODE FOR GOOGLE MAPS MAP -->
   <script async defer>
     var students;
     var initMap;
@@ -27,7 +30,7 @@
       url: '/Kpcr1ukvkd9toBN3dAWE',
       method: 'get',
       success: function(result, error) {
-        console.log('SUCCESS ? ', result, error);
+        // console.log('SUCCESS ? ', result, error);
         students = result;
 
         console.log("reaches map", students[0]);
@@ -37,6 +40,22 @@
         initMap = function () {
           const latlong = {lat: 41.313616, lng: -72.920970};
 
+          // CODE FOR HEAT MAP:
+          console.log('in eq callbac');
+          var heatmapData = [];
+          for (var i = 0; i < students.length; i++) {
+            console.log('s['+i+']=', students[i]);
+
+            var latLng = new google.maps.LatLng(students[i].lat, students[i].long);
+            heatmapData.push(latLng);
+          }
+
+          heatmap = new google.maps.visualization.HeatmapLayer({
+            data: heatmapData,
+            map: map
+          });
+
+          // INITIALIZE MAP
           map = new google.maps.Map(document.getElementById('map'), {
             zoom: 7,
             center: latlong,
@@ -44,35 +63,29 @@
             mapTypeControlOptions: {
               mapTypeIds: ['roadmap', 'terrain', 'satellite']
             }
+
           });
 
+          // MARKER CLUSTER CODE
           var locations = [];
-
-          // CREATE MARKERS
           students.forEach(function(stud, i) {
             var marker = new google.maps.Marker({
               position: {lat: stud.lat, lng: stud.long},
               map: map,
               icon: {
-                url: stud.icon,
-                scaledSize: new google.maps.Size(45, 45)
+                url: 'https://students.yale.edu/facebook/images/rescollege/YC40.jpg',
+                scaledSize: new google.maps.Size(1, 1)
               }
             });
             locations[i] = marker;
           });
-
-          google.maps.event.addListener(map, 'tilesloaded', function() {
-            unlock = true;
-          });
-
+          var options = {
+            imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+          };
+          var markerCluster = new MarkerClusterer(map, locations, options);
         }
 
         console.log('SHOULD FINISH LOOP');
-
-        // ADD Marker Clusters
-        // var markerCluster = new MarkerClusterer(map1, locations,
-        //  {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
         showMap();
       }
     });
@@ -80,11 +93,11 @@
     // FUNCTION TO SHOW MAP AFTER JSON LOADED
     var showMap = (function () {
       console.log('in show map');
-      document.getElementById("map_src").setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAD4XfinLq0CaUSr_D_OUxUrHbZDlnSjYY&callback=initMap');
+      document.getElementById("map_src").setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAD4XfinLq0CaUSr_D_OUxUrHbZDlnSjYY&libraries=visualization&callback=initMap');
       document.getElementById("map").append("please wait while data loads!"); // this is so that the page reloads when it reaches this method
-      // var newEl = document.createElement("<div>");
       $("#warning").show();
     }).bind(this);
+
   </script>
 
   <!-- HTML STRUCTURE -->
@@ -95,9 +108,8 @@
       </div>
       <div id='buttons'>
         <div class='btn'>switch to:</div>
+        <a class='btn' href='/markers'>image markers</a>
         <a class='btn' href='/'>college markers</a>
-        <a class='btn' href='/heatmap'>cluster map</a>
-
       </div>
     </div>
     <div id='map'> </div>
