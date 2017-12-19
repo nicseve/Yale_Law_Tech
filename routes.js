@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-var studentdata = require('../public/students');
+var studentdata = require('./public/students');
 
 // ROUTES for different types of maps
 router.get('/', (req, res) => {
