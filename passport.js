@@ -23,8 +23,13 @@ module.exports = function(passport) {
     },
     function(accessToken, refreshToken, profile, cb) {
       // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        console.log('in passport google strategy');
-        return cb(err, user);
+        console.log('in passport google strategy', accessToken);
+        const user = {
+            googleId: profile.id,
+            accessToken: accessToken,
+            displayName: profile.name
+        };
+        return cb(null, user);
       // });
     }
   ));
