@@ -2,23 +2,98 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <title>yale law tech project</title>
+    <link rel="icon" href="./yale_icon1.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro:400,600,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+    <link href="./main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+
+    <style>
+    body {
+      height: 80vh;
+      width: 90vw;
+      margin: 5vh 5vw;
+      padding: 0;
+      background-color: black;
+      color: white;
+    }
+    #root {
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    #container {
+      background-color: #045372;
+      border: 5px groove grey;
+      border-radius: 10px;
+      padding: 5vh 0;
+    }
+    #title {
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Bungee';
+      background-color: #045372;
+      border-radius: 5px;
+      padding: 1vh 1vw;
+      margin: 0 5vw 1vh 5vw;
+    }
+    #buttons {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bungee';
+      /* background-color: #045372; */
+      /* padding: 1vh 1vw; */
+      /* margin: 1vh 5vw; */
+    }
+    .btn {
+      text-decoration: none;
+    }
+    #loginbtn {
+      font-size: 20px;
+      color: white;
+      background-color: #7a7c82;
+      border: 3px outset lightgrey;
+      border-radius: 5px;
+      padding: 10px 7px;
+      /* width: 30px; */
+    }
+    .subtext {
+      color: lightgrey;
+      font-weight: normal;
+      font-size: 13px;
+    }
+    h1 {
+      margin: 0;
+    }
+    </style>
   </head>
   <body>
     <div id='root'>
-      <a href="/auth/google" class = "loginbutton pink">
-        <span class = "h4">Login with Google</span>
-      </a>
+      <div id='container'>
+        <div id='title'>
+          <h1>yale law tech project</h1>
+          <div class="subtext">(you must be logged into your yale account to view)</div>
+          <br />
+          <div class="subtext">brought to you by: Amanda, Nic & Vivek</div>
+          <!-- <br /> -->
+        </div>
+        <br />
+        <br />
+        <div id="buttons">
+         <a class='btn' href="/auth/google">
+            <span class='btn' id='loginbtn'> Login with Google </span>
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- jQuery -->
     <script src="//code.jquery.com/jquery.js"></script>
-    <!-- Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </body>
 </html>
