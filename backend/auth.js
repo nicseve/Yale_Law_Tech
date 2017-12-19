@@ -23,14 +23,6 @@ module.exports = function (app, passport) {
     })
   );
 
-  // app.get('/auth/google/callback',
-  //   passport.authenticate('google', { failureRedirect: '/login', session: false }),
-  //   function (req, res) {
-  //     console.log('in g-oauth2 success redirect');
-  //     res.cookie('accessToken', req.user.accessToken, { expires: 0 });
-  //     res.redirect('/markers');
-  //   });
-
   //Login Wall!
   app.use((req, res, next) => {
     if (req.user) {
