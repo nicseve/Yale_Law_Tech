@@ -9,7 +9,8 @@ module.exports = function (app, passport) {
       {
         scope : ['email'],
         accessType: 'offline',
-        prompt: 'consent'
+        prompt: 'consent',
+        hd: 'yale.edu'
       }
     )
   );
