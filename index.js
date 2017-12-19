@@ -35,8 +35,8 @@ const auth = require('./backend/auth');
 auth(app, passport);
 
 // routes
-app.use('/', router);
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', router);
 
 /* ********** error handlers ********** */
 
