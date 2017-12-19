@@ -3,12 +3,13 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const router = require('./routes');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+
 
 // configure passport
 const passport = require('passport');
 const session = require('express-session');
 const configPassport = require('./passport');
-const auth = require('./auth');
 configPassport(passport);
 
 const port = process.env.PORT || 3000;
@@ -17,9 +18,10 @@ const app = express();
 // middleware
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+app.use(cookieParser()); // read cookies (needed for auth)
 
 // required for passport
-app.use(session({ secret: 'ilovehorizonshackathon' })); // session secret
+app.use(session({ secret: 'yalelawtechwasagreatclass' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
@@ -29,6 +31,7 @@ app.get('/login', (req, res) => {
 });
 
 //Authentication Routes
+const auth = require('./auth');
 auth(app, passport);
 
 // routes
