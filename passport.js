@@ -6,7 +6,7 @@ module.exports = function(passport) {
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://www.yalelawtech.herokuapp.com/auth/google/callback"
+      callbackURL: "http://yalelawtech.herokuapp.com/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
       // User.findOrCreate({ googleId: profile.id }, function (err, user) {
