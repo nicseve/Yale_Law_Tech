@@ -15,7 +15,7 @@ module.exports = function(passport) {
           accessToken: accessToken,
           displayName: profile.name
       };
-      console.log('USER:', user);
+      console.log('USER:', user, profile);
 
       return cb(null, user);
     }
