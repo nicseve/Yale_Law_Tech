@@ -1,6 +1,8 @@
 # Yale_Law_Tech
 Yale Law, Tech, and Culture project inspired by Feist v. Rural case law. 
 
+http://yalelawtech.herokuapp.com/
+
 Login with an @yale.edu account and view data from students in three different ways: by image, cluster, and residential college
 
 <p align="center">
